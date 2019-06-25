@@ -1,0 +1,214 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[83],{
+
+/***/ "../../libs/shared/src/lib/defer-bg-image/defer-bg-image.directive.ts":
+/*!*********************************************************************************************!*\
+  !*** /home/circleci/iridium/libs/shared/src/lib/defer-bg-image/defer-bg-image.directive.ts ***!
+  \*********************************************************************************************/
+/*! exports provided: DeferBgDirective */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeferBgDirective", function() { return DeferBgDirective; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "../../node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _iridium_core__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @iridium/core */ "../../libs/core/src/index.ts");
+
+
+
+var DeferBgDirective = /** @class */ /*@__PURE__*/ (function () {
+    function DeferBgDirective(el, windowRef, platformId) {
+        this.el = el;
+        this.windowRef = windowRef;
+        this.platformId = platformId;
+        this.deferBgImgURL = '/assets/iridium/images/shared/placeholder.png';
+        this.isLive = false;
+        this.isLoaded = false;
+        this.windowHeight = 0;
+    }
+    DeferBgDirective.prototype.ngOnInit = function () {
+        // if its not browser, don't need to set src or srcset attributes
+        if (!Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(this.platformId)) {
+            return;
+        }
+        var window = this.windowRef.nativeWindow;
+        this.resize = this._resize.bind(this);
+        this.scroll = this._scroll.bind(this);
+        window.addEventListener('resize', this.resize, { passive: true });
+        window.addEventListener('scroll', this.scroll, { passive: true });
+        this.isLive = true;
+        this._resize();
+        this._scroll();
+    };
+    DeferBgDirective.prototype.ngOnDestroy = function () {
+        this.unbind();
+    };
+    DeferBgDirective.prototype.unbind = function () {
+        if (!Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(this.platformId)) {
+            return;
+        }
+        var window = this.windowRef.nativeWindow;
+        window.removeEventListener('resize', this.resize);
+        window.removeEventListener('scroll', this.scroll);
+        this.scroll = this.resize = null;
+    };
+    DeferBgDirective.prototype.checkAndLoad = function () {
+        var el = this.el.nativeElement;
+        var box = el.getBoundingClientRect();
+        if (box.top === undefined) {
+            return;
+        }
+        // if the top of the image is reaching the 2.5 * viewport height
+        // then it should start loading
+        if (box.top - this.windowHeight * 2.5 < 0) {
+            if (this.deferBgImg) {
+                this.backgroundImage = this.deferBgImg;
+            }
+            else {
+                this.backgroundImage = "url(" + this.deferBgImgURL + ")";
+            }
+            if (this.deferBgRepeat) {
+                this.backgroundRepeat = this.deferBgRepeat;
+            }
+            if (this.deferBgSize) {
+                this.backgroundSize = this.deferBgSize;
+            }
+            this.isLoaded = true;
+            this.unbind();
+        }
+    };
+    DeferBgDirective.prototype._resize = function () {
+        var _this = this;
+        var window = this.windowRef.nativeWindow;
+        if (!this.isLive || this.isLoaded) {
+            return;
+        }
+        window.requestAnimationFrame(function () {
+            _this.windowHeight = window.innerHeight;
+        });
+    };
+    DeferBgDirective.prototype._scroll = function () {
+        var _this = this;
+        if (!this.isLive || this.isLoaded) {
+            return;
+        }
+        this.windowRef.nativeWindow.requestAnimationFrame(function () {
+            _this.checkAndLoad();
+        });
+    };
+    return DeferBgDirective;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../libs/shared/src/lib/defer-bg-image/defer-bg-image.module.ts":
+/*!******************************************************************************************!*\
+  !*** /home/circleci/iridium/libs/shared/src/lib/defer-bg-image/defer-bg-image.module.ts ***!
+  \******************************************************************************************/
+/*! exports provided: DeferBgImageModule */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeferBgImageModule", function() { return DeferBgImageModule; });
+var DeferBgImageModule = /** @class */ /*@__PURE__*/ (function () {
+    function DeferBgImageModule() {
+    }
+    return DeferBgImageModule;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../libs/shared/src/lib/udacity-advantage-banner/udacity-advantage-banner.component.ngfactory.js":
+/*!***************************************************************************************************************************!*\
+  !*** /home/circleci/iridium/libs/shared/src/lib/udacity-advantage-banner/udacity-advantage-banner.component.ngfactory.js ***!
+  \***************************************************************************************************************************/
+/*! exports provided: RenderType_UdacityAdvantageBannerComponent, View_UdacityAdvantageBannerComponent_0, View_UdacityAdvantageBannerComponent_Host_0, UdacityAdvantageBannerComponentNgFactory */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RenderType_UdacityAdvantageBannerComponent", function() { return RenderType_UdacityAdvantageBannerComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "View_UdacityAdvantageBannerComponent_0", function() { return View_UdacityAdvantageBannerComponent_0; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "View_UdacityAdvantageBannerComponent_Host_0", function() { return View_UdacityAdvantageBannerComponent_Host_0; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UdacityAdvantageBannerComponentNgFactory", function() { return UdacityAdvantageBannerComponentNgFactory; });
+/* harmony import */ var _udacity_advantage_banner_component_scss_shim_ngstyle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./udacity-advantage-banner.component.scss.shim.ngstyle */ "../../libs/shared/src/lib/udacity-advantage-banner/udacity-advantage-banner.component.scss.shim.ngstyle.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "../../node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _udacity_advantage_banner_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./udacity-advantage-banner.component */ "../../libs/shared/src/lib/udacity-advantage-banner/udacity-advantage-banner.component.ts");
+/**
+ * @fileoverview This file was generated by the Angular template compiler. Do not edit.
+ *
+ * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride,checkTypes}
+ * tslint:disable
+ */
+/** PURE_IMPORTS_START _udacity_advantage_banner.component.scss.shim.ngstyle,_angular_core,_angular_common,_udacity_advantage_banner.component PURE_IMPORTS_END */
+/** PURE_IMPORTS_START _udacity_advantage_banner.component.scss.shim.ngstyle,_angular_core,_angular_common,_udacity_advantage_banner.component PURE_IMPORTS_END */
+
+
+
+
+var styles_UdacityAdvantageBannerComponent = [_udacity_advantage_banner_component_scss_shim_ngstyle__WEBPACK_IMPORTED_MODULE_0__["styles"]];
+var RenderType_UdacityAdvantageBannerComponent = /*@__PURE__*/ /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵcrt"]({ encapsulation: 0, styles: styles_UdacityAdvantageBannerComponent, data: {} });
+
+function View_UdacityAdvantageBannerComponent_2(_l) { return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 6, "div", [["class", "feature"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](1, 0, null, null, 0, "div", [["class", "image"]], [[4, "background-image", null]], null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](2, 0, null, null, 4, "div", [], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](3, 0, null, null, 1, "div", [["class", "title"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](4, null, ["", ""])), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](5, 0, null, null, 1, "div", [["class", "description"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](6, null, ["", ""]))], null, function (_ck, _v) { var currVal_0 = (("url(" + ((_v.context.$implicit == null) ? null : ((_v.context.$implicit.image == null) ? null : ((_v.context.$implicit.image.file == null) ? null : _v.context.$implicit.image.file.url)))) + ")"); _ck(_v, 1, 0, currVal_0); var currVal_1 = ((_v.context.$implicit == null) ? null : _v.context.$implicit.title); _ck(_v, 4, 0, currVal_1); var currVal_2 = ((_v.context.$implicit == null) ? null : _v.context.$implicit.description); _ck(_v, 6, 0, currVal_2); }); }
+function View_UdacityAdvantageBannerComponent_1(_l) { return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 10, null, null, null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](1, 0, null, null, 9, "div", [["class", "udacity-advantage"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](2, 0, null, null, 8, "div", [["class", "contain"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](3, 0, null, null, 4, "div", [["class", "header"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](4, 0, null, null, 1, "h2", [], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](5, null, ["", ""])), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](6, 0, null, null, 1, "p", [], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵted"](7, null, ["", ""])), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](8, 0, null, null, 2, "div", [["class", "features"]], null, null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵand"](16777216, null, null, 1, null, View_UdacityAdvantageBannerComponent_2)), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](10, 278528, null, 0, _angular_common__WEBPACK_IMPORTED_MODULE_2__["NgForOf"], [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewContainerRef"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["TemplateRef"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["IterableDiffers"]], { ngForOf: [0, "ngForOf"] }, null)], function (_ck, _v) { var _co = _v.component; var currVal_2 = ((_co.data == null) ? null : _co.data.features); _ck(_v, 10, 0, currVal_2); }, function (_ck, _v) { var _co = _v.component; var currVal_0 = ((_co.data == null) ? null : _co.data.title); _ck(_v, 5, 0, currVal_0); var currVal_1 = ((_co.data == null) ? null : _co.data.subtitle); _ck(_v, 7, 0, currVal_1); }); }
+function View_UdacityAdvantageBannerComponent_0(_l) { return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵand"](16777216, null, null, 1, null, View_UdacityAdvantageBannerComponent_1)), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](1, 16384, null, 0, _angular_common__WEBPACK_IMPORTED_MODULE_2__["NgIf"], [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ViewContainerRef"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["TemplateRef"]], { ngIf: [0, "ngIf"] }, null)], function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.data; _ck(_v, 1, 0, currVal_0); }, null); }
+function View_UdacityAdvantageBannerComponent_Host_0(_l) { return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 1, "ir-udacity-advantage-banner", [], null, null, null, View_UdacityAdvantageBannerComponent_0, RenderType_UdacityAdvantageBannerComponent)), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](1, 49152, null, 0, _udacity_advantage_banner_component__WEBPACK_IMPORTED_MODULE_3__["UdacityAdvantageBannerComponent"], [], null, null)], null, null); }
+var UdacityAdvantageBannerComponentNgFactory = /*@__PURE__*/ /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵccf"]("ir-udacity-advantage-banner", _udacity_advantage_banner_component__WEBPACK_IMPORTED_MODULE_3__["UdacityAdvantageBannerComponent"], View_UdacityAdvantageBannerComponent_Host_0, { data: "data" }, {}, []);
+
+
+
+/***/ }),
+
+/***/ "../../libs/shared/src/lib/udacity-advantage-banner/udacity-advantage-banner.component.scss.shim.ngstyle.js":
+/*!***********************************************************************************************************************************!*\
+  !*** /home/circleci/iridium/libs/shared/src/lib/udacity-advantage-banner/udacity-advantage-banner.component.scss.shim.ngstyle.js ***!
+  \***********************************************************************************************************************************/
+/*! exports provided: styles */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "styles", function() { return styles; });
+/**
+ * @fileoverview This file was generated by the Angular template compiler. Do not edit.
+ *
+ * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride,checkTypes}
+ * tslint:disable
+ */
+/** PURE_IMPORTS_START  PURE_IMPORTS_END */
+/** PURE_IMPORTS_START  PURE_IMPORTS_END */
+var styles = ["html[_ngcontent-%COMP%] {\n  box-sizing: border-box; }\n\n*[_ngcontent-%COMP%], *[_ngcontent-%COMP%]::after, *[_ngcontent-%COMP%]::before {\n  box-sizing: inherit; }\n\n\n\nhtml.wf-loading[_ngcontent-%COMP%]   .tk-font[_ngcontent-%COMP%] {\n  visibility: hidden; }\n\nhtml.wf-active[_ngcontent-%COMP%]   .tk-font[_ngcontent-%COMP%] {\n  visibility: initial; }\n\n\n\n.tk-font-balboa[_ngcontent-%COMP%] {\n  font-family: balboa, 'Open Sans', sans-serif; }\n\n.tk-font-balboa-condensed[_ngcontent-%COMP%] {\n  font-family: balboa-extra-condensed, 'Open Sans', sans-serif; }\n\nhtml[_ngcontent-%COMP%] {\n  box-sizing: border-box; }\n\n*[_ngcontent-%COMP%], *[_ngcontent-%COMP%]::after, *[_ngcontent-%COMP%]::before {\n  box-sizing: inherit; }\n\n\n\nhtml.wf-loading[_ngcontent-%COMP%]   .tk-font[_ngcontent-%COMP%] {\n  visibility: hidden; }\n\nhtml.wf-active[_ngcontent-%COMP%]   .tk-font[_ngcontent-%COMP%] {\n  visibility: initial; }\n\n\n\n.tk-font-balboa[_ngcontent-%COMP%] {\n  font-family: balboa, 'Open Sans', sans-serif; }\n\n.tk-font-balboa-condensed[_ngcontent-%COMP%] {\n  font-family: balboa-extra-condensed, 'Open Sans', sans-serif; }\n\n.udacity-advantage[_ngcontent-%COMP%] {\n  background-color: #f3f8fe; }\n\n.udacity-advantage[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n    font-size: 1.5rem;\n    line-height: 2.5rem; }\n\n@media screen and (min-width: 48rem) {\n      .udacity-advantage[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n        font-size: 2rem;\n        line-height: 3.5rem; } }\n\n.udacity-advantage[_ngcontent-%COMP%]   .header[_ngcontent-%COMP%] {\n    text-align: center;\n    padding: 0 1.25rem;\n    margin-bottom: 1.5625rem; }\n\n.udacity-advantage[_ngcontent-%COMP%]   .header[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n      font-size: 1.5rem; }\n\n@media screen and (min-width: 48rem) {\n        .udacity-advantage[_ngcontent-%COMP%]   .header[_ngcontent-%COMP%]   h2[_ngcontent-%COMP%] {\n          font-size: 2rem; } }\n\n@media screen and (min-width: 48rem) {\n      .udacity-advantage[_ngcontent-%COMP%]   .header[_ngcontent-%COMP%] {\n        margin-bottom: 3.125rem; } }\n\n.udacity-advantage[_ngcontent-%COMP%]   .features[_ngcontent-%COMP%] {\n    display: flex;\n    flex-direction: column;\n    align-items: center; }\n\n@media screen and (min-width: 48rem) {\n      .udacity-advantage[_ngcontent-%COMP%]   .features[_ngcontent-%COMP%] {\n        flex-wrap: wrap;\n        flex-direction: row; } }\n\n.udacity-advantage[_ngcontent-%COMP%]   .features[_ngcontent-%COMP%]   .feature[_ngcontent-%COMP%] {\n      flex: 0;\n      display: flex;\n      flex-direction: column;\n      max-width: 18.75rem;\n      margin: 1.5625rem 1.25rem; }\n\n.udacity-advantage[_ngcontent-%COMP%]   .features[_ngcontent-%COMP%]   .feature[_ngcontent-%COMP%]:first-of-type {\n        margin-top: 0; }\n\n.udacity-advantage[_ngcontent-%COMP%]   .features[_ngcontent-%COMP%]   .feature[_ngcontent-%COMP%]   .image[_ngcontent-%COMP%] {\n        width: 17rem;\n        height: 10rem;\n        background-repeat: no-repeat;\n        background-size: cover;\n        background-position: center;\n        margin-right: 0;\n        margin-bottom: 1.5625rem; }\n\n.udacity-advantage[_ngcontent-%COMP%]   .features[_ngcontent-%COMP%]   .feature[_ngcontent-%COMP%]   .title[_ngcontent-%COMP%] {\n        font-weight: 600;\n        font-size: 1rem;\n        line-height: 1.75rem;\n        margin-top: 0;\n        margin-bottom: 0.625rem; }\n\n.udacity-advantage[_ngcontent-%COMP%]   .features[_ngcontent-%COMP%]   .feature[_ngcontent-%COMP%]   .description[_ngcontent-%COMP%] {\n        font-size: 1rem;\n        line-height: 1.75rem; }\n\n@media screen and (min-width: 48rem) {\n        .udacity-advantage[_ngcontent-%COMP%]   .features[_ngcontent-%COMP%]   .feature[_ngcontent-%COMP%] {\n          flex: 1 0 45%;\n          flex-direction: row;\n          max-width: none;\n          justify-content: space-between;\n          margin: 1.5625rem; }\n          .udacity-advantage[_ngcontent-%COMP%]   .features[_ngcontent-%COMP%]   .feature[_ngcontent-%COMP%]   .image[_ngcontent-%COMP%] {\n            flex: 1 0 13.125rem;\n            height: 13.125rem;\n            margin-right: 2rem;\n            margin-bottom: 0; }\n          .udacity-advantage[_ngcontent-%COMP%]   .features[_ngcontent-%COMP%]   .feature[_ngcontent-%COMP%]   .title[_ngcontent-%COMP%] {\n            font-size: 1.125rem;\n            line-height: 2rem;\n            margin-top: 0.625rem; }\n          .udacity-advantage[_ngcontent-%COMP%]   .features[_ngcontent-%COMP%]   .feature[_ngcontent-%COMP%]   .description[_ngcontent-%COMP%] {\n            font-size: 0.875rem;\n            line-height: 1.5rem; } }"];
+
+
+
+/***/ }),
+
+/***/ "../../libs/shared/src/lib/udacity-advantage-banner/udacity-advantage-banner.component.ts":
+/*!*****************************************************************************************************************!*\
+  !*** /home/circleci/iridium/libs/shared/src/lib/udacity-advantage-banner/udacity-advantage-banner.component.ts ***!
+  \*****************************************************************************************************************/
+/*! exports provided: UdacityAdvantageBannerComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "UdacityAdvantageBannerComponent", function() { return UdacityAdvantageBannerComponent; });
+/* harmony import */ var _udacity_advantage_model__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./udacity-advantage.model */ "../../libs/shared/src/lib/udacity-advantage-banner/udacity-advantage.model.ts");
+
+var UdacityAdvantageBannerComponent = /** @class */ /*@__PURE__*/ (function () {
+    function UdacityAdvantageBannerComponent() {
+    }
+    return UdacityAdvantageBannerComponent;
+}());
+
+
+
+/***/ })
+
+}]);

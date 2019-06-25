@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../assets/style.css">
+  <title>Grid Template Areas</title>
+
+  
+  <link rel="stylesheet" href="css/index7.css">
+<style>
+/*
+  Oh Hello!
+
+  These are some base styles so that our tutorial looks good.
+
+  Let's go through the important bits real quick
+*/
+:root {
+  --yellow: #ffc600;
+  --black: #272727;
+}
+
+html {
+  /* border-box box model allows us to add padding and border to our elements without increasing their size */
+  box-sizing: border-box;
+  /* A system font stack so things load nice and quick! */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+    Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-weight: 900;
+  font-size: 10px;
+  color: var(--black);
+  text-shadow: 0 2px 0 rgba(0, 0, 0, 0.07);
+}
+
+/*
+  WAT IS THIS?!
+  We inherit box-sizing: border-box; from our <html> selector
+  Apparently this is a bit better than applying box-sizing: border-box; directly to the * selector
+*/
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  background-image: url("./images/topography.svg"),
+    linear-gradient(110deg, #f93d66, #6d47d9);
+  background-size: 340px, auto;
+  min-height: calc(100vh - 100px);
+  margin: 50px;
+  /* background: white; */
+  background-position: fixed;
+  letter-spacing: -1px;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 0 5px 0;
+}
+/* Each item in our grid will contain numbers */
+.item {
+  /* We center the contents of these items. You can also do this with flexbox too! */
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  border: 5px solid rgba(0, 0, 0, 0.03);
+  border-radius: 3px;
+  font-size: 35px;
+  background-color: var(--yellow); /* best colour */
+}
+
+.item p {
+  margin: 0 0 5px 0;
+}
+</style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="item item1">
+      <p>I'm Sidebar #1</p>
+    </div>
+    <div class="item item2">
+      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore, sed.</p>
+      <p>Lorem ipsum d</p>
+    </div>
+    <div class="item item3">
+      <p>I'm Sidebar #2</p>
+    </div>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+   <br>
+    <div class="item footer">
+      <!-- <p>I'm the footer</p> -->
+      
+  <div class='selector'>
+    <ul>
+      <li>
+        <input id='1' type='checkbox'>
+        <label for='1'><img src="c1.svg" width="80px" height="90px"/></label>
+      </li>
+      <li>
+        <input id='2' type='checkbox'>
+        <label for='2'><img src="c2.svg" width="80px" height="90px"/></label>
+      </li>
+      <li>
+        <input id='3' type='checkbox'>
+        <label for='3'><img src="c3.svg" width="80px" height="90px"/></label>
+      </li>
+      <li>
+        <input id='4' type='checkbox'>
+        <label for='4'><img src="c4.svg" width="80px" height="90px"/></label>
+      </li>
+      <li>
+        <input id='5' type='checkbox'>
+        <label for='5'><img src="c5.svg" width="80px" height="90px"/></label>
+      </li>
+      <li>
+        <input id='6' type='checkbox'>
+        <label for='6'><img src="c6.svg" width="80px" height="90px"/></label>
+      </li>
+      <li>
+        <input id='7' type='checkbox'>
+        <label for='7'><img src="c7.svg" width="80px" height="90px"/></label>
+      </li>
+    </ul>
+    <button>
+      <img src="logo.svg" width="90px" height="90px"/></button>
+  </div>
+    <script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+  
+      <script  src="js/index7.js"></script>
+  
+  
+    </div>
+  </div>
+
+  <style>
+    .container {
+      display: grid;
+      grid-gap: 20px;
+      grid-template-columns: 1fr 10fr 1fr;
+      grid-template-rows: 150px 150px 100px;
+      grid-template-areas:
+        "sidebar-1  content   sidebar-2"
+        "sidebar-1  content   sidebar-2"
+        "footer     footer    footer"
+    }
+
+    .footer {
+      grid-area: footer;
+    }
+
+    .item1 {
+      grid-area: sidebar-1;
+    }
+
+    .item2 {
+      grid-area: content;
+    }
+
+    .item3 {
+      grid-area: sidebar-2;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        grid-template-areas:
+          "content    content     content"
+          "sidebar-1  sidebar-1   sidebar-2"
+          "footer     footer      footer"
+      }
+    }
+  </style>
+</body>
+
+</html>

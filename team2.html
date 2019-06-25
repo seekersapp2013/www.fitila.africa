@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Fitila Africa</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<style>
+.blink_me {
+  animation: blinker 1s linear infinite;
+}
+
+@keyframes blinker {
+  50% {
+    opacity: 0;
+  }
+}
+
+</style>
+
+
+<style>
+
+    @font-face {
+    font-family: 'Gotham Book';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Book'), url('GothamBook.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham Book Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Book Italic'), url('GothamBookItalic.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham Light';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Light'), url('GothamLight.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham Light Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Light Italic'), url('GothamLightItalic.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Medium'), url('GothamMedium.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Medium'), url('GothamMedium_1.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham Medium';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Medium'), url('GothamMediumItalic.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Bold'), url('GothamBold.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Bold'), url('Gotham-Bold.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham Bold Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Bold Italic'), url('GothamBoldItalic.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham Black Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Black Regular'), url('Gotham-Black.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham Light Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Light Regular'), url('Gotham-Light.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham Thin Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Thin Regular'), url('Gotham-Thin.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham XLight Regular';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham XLight Regular'), url('Gotham-XLight.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham Book Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Book Italic'), url('Gotham-BookItalic.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham Thin Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Thin Italic'), url('Gotham-ThinItalic.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham Ultra Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham Ultra Italic'), url('Gotham-UltraItalic.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham XLight Italic';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham XLight Italic'), url('Gotham-XLightItalic.woff') format('woff');
+    }
+    
+    @font-face {
+    font-family: 'Gotham-Rounded-Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Gotham-Rounded-Bold'), url('Gotham-Rounded-Bold.woff') format('woff');
+    }
+    
+    @font-face {
+        font-family: 'Gotham-Rounded-Bold-Italic';
+        font-style: normal;
+        font-weight: normal;
+        src: local('Gotham-Rounded-Bold-Italic'), url('Gotham-Rounded-Bold-Italic.woff') format('woff');
+    }
+    
+    @font-face {
+        font-family: 'Gotham-Rounded-Book-Italic';
+        font-style: normal;
+        font-weight: normal;
+        src: local('Gotham-Rounded-Book-Italic'), url('Gotham-Rounded-Book-Italic.woff') format('woff');
+    }
+    
+    @font-face {
+        font-family: 'Gotham-Rounded-Light';
+        font-style: normal;
+        font-weight: normal;
+        src: local('Gotham-Rounded-Light'), url('Gotham-Rounded-Light.woff') format('woff');
+    }
+    
+    @font-face {
+        font-family: 'Gotham-Rounded-Light-Italic';
+        font-style: normal;
+        font-weight: normal;
+        src: local('Gotham-Rounded-Light-Italic'), url('Gotham-Rounded-Light-Italic.woff') format('woff');
+    }
+    
+    @font-face {
+        font-family: 'Gotham-Rounded-Medium-Italic';
+        font-style: normal;
+        font-weight: normal;
+        src: local('Gotham-Rounded-Medium-Italic'), url('Gotham-Rounded-Medium-Italic.woff') format('woff');
+    }
+    
+    @font-face {
+        font-family: 'Gotham-Thin';
+        font-style: normal;
+        font-weight: normal;
+        src: local('Gotham-Thin'), url('Gotham-Thin.woff') format('woff');
+    }
+    
+    @font-face {
+        font-family: 'Gotham-ThinItalic';
+        font-style: normal;
+        font-weight: normal;
+        src: local('Gotham-ThinItalic'), url('Gotham-ThinItalic.woff') format('woff');
+    }
+    
+    @font-face {
+        font-family: 'Gotham-UltraItalic';
+        font-style: normal;
+        font-weight: normal;
+        src: local('Gotham-UltraItalic'), url('Gotham-UltraItalic.woff') format('woff');
+    }
+    
+    @font-face {
+        font-family: 'Gotham-XLight';
+        font-style: normal;
+        font-weight: normal;
+        src: local('Gotham-XLight'), url('Gotham-XLight.woff') format('woff');
+    }
+    
+    @font-face {
+        font-family: 'Gotham-XLightItalic';
+        font-style: normal;
+        font-weight: normal;
+        src: local('Gotham-XLightItalic'), url('Gotham-XLightItalic.woff') format('woff');
+    }
+    
+    @font-face {
+        font-family: 'Gotham-Rounded-Medium';
+        font-style: normal;
+        font-weight: normal;
+        src: local('Gotham-Rounded-Medium'), url('Gotham-Rounded-Medium.woff') format('woff');
+        
+    }
+
+/*FOTOGALLERY FANCYBOX BEGIN */
+.alboms {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  max-width: 850px;
+  margin: 0 auto;
+}
+.alboms__item {
+  border: 1px solid #070606;
+  position: relative;
+  overflow: hidden;
+  transition: 0.5s Ease;
+  width: 250px;
+  height: 250px;
+  margin: 20px 10px;
+}
+.alboms__item img {
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+}
+
+.alboms__itemCaption {
+  border: 1px solid #070606;
+  transition: 0.5s Ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  margin-top: -250px;
+  text-align: center;
+  background: #ffbb16;
+  /* opacity: 0.422; */
+}
+.alboms__item:hover > .alboms__itemCaption {
+  margin-top: 0;
+}
+
+/*FOTOGALLERY FANCYBOX END */
+h2{
+  font-family: Gotham Bold;
+}
+p{
+  font-family: Gotham Medium;
+}
+
+.menu {cursor: pointer;}
+    .menu:hover {
+    font-weight:bold;}
+
+    </style>
+
+</head>
+<body>
+    <!-- <img src="header.svg"/> -->
+    <?xml version="1.0" encoding="utf-8"?>
+                    <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"  viewBox="0 0 1920 300">
+                      
+                     <!--Header Starts Here-->
+                        <g id="Web_1920_2" data-name="Web 1920 – 2" clip-path="url(#clip-Web_1920_2)">
+                          <g id="Group_1" data-name="Group 1" transform="translate(167.021 136.373)">
+
+                            <path id="Path_1"  data-name="Path 1" d="M310.4,643.264h-.6a6.163,6.163,0,0,1-6.273-6.174,6.247,6.247,0,0,1,6.273-6.274h.6v-3.385c0-5.876,1.493-10.158,4.281-12.947s6.872-4.181,12.249-4.181a37.012,37.012,0,0,1,6.174.4,6.154,6.154,0,0,1,5.178,6.074,6.292,6.292,0,0,1-6.174,6.275h-1.294c-3.487,0-5.478,1.791-5.478,5.775v2.09h6.573a6.175,6.175,0,1,1,0,12.348h-6.373v33.461a7.568,7.568,0,1,1-15.136,0Z" transform="translate(-303.531 -604.425)" fill="#1a1818"/>
+                  
+                            <path id="Path_2" data-name="Path 2" d="M474.314,618.18c0-4.381,3.685-7.069,8.465-7.069s8.465,2.688,8.465,7.069v.2c0,4.382-3.686,7.171-8.465,7.171s-8.465-2.79-8.465-7.171Z" transform="translate(-432.19 -605.034)" fill="#030404"/>
+                  
+                            <path id="Path_3" data-name="Path 3" d="M477.951,696.6a7.568,7.568,0,1,1,15.136,0v39.434a7.568,7.568,0,1,1-15.136,0Z" transform="translate(-434.93 -663.735)" fill="#1a1818"/>
+                            
+                            <path id="Path_4" data-name="Path 4" d="M585.853,686.2V660.906h-.5a6.473,6.473,0,0,1,0-12.945h.5v-6.672a7.568,7.568,0,0,1,15.137,0v6.672h6.672a6.473,6.473,0,1,1,0,12.945H600.99v22.805c0,3.485,1.493,5.18,4.88,5.18.5,0,1.494-.1,1.793-.1a6.311,6.311,0,0,1,6.273,6.274,6.158,6.158,0,0,1-3.883,5.677,22.337,22.337,0,0,1-8.664,1.493C592.127,702.234,585.853,698.55,585.853,686.2Z" transform="translate(-510.968 -622.067)" fill="#1a1818"/>
+                            <path id="Path_5" data-name="Path 5" d="M763.8,618.18c0-4.381,3.684-7.069,8.464-7.069s8.465,2.688,8.465,7.069v.2c0,4.382-3.685,7.171-8.465,7.171s-8.464-2.79-8.464-7.171Z" transform="translate(-650.273 -605.034)" fill="#ffbb16" class="blink_me"/>
+                            <path id="Path_6" data-name="Path 6" d="M767.427,696.6a7.569,7.569,0,1,1,15.138,0v39.434a7.569,7.569,0,0,1-15.138,0Z" transform="translate(-653.007 -663.735)" fill="#1a1818"/>
+                            <path id="Path_7" data-name="Path 7" d="M889.352,618.274a7.569,7.569,0,1,1,15.138,0v58.753a7.569,7.569,0,0,1-15.138,0Z" transform="translate(-744.859 -604.728)" fill="#1a1818"/>
+                            <path id="Path_8" data-name="Path 8" d="M1001.768,724.552v-.2c0-11.651,8.862-17.029,21.509-17.029a37.931,37.931,0,0,1,13.045,2.191v-.9c0-6.273-3.884-9.758-11.451-9.758a34.721,34.721,0,0,0-10.456,1.493,6.415,6.415,0,0,1-2.191.4,6.164,6.164,0,0,1-6.275-6.174,6.275,6.275,0,0,1,4.083-5.875,46.467,46.467,0,0,1,17.029-2.789c8.265,0,14.241,2.192,18.025,5.975,3.982,3.983,5.776,9.858,5.776,17.029v24.3a7.269,7.269,0,0,1-7.37,7.27c-4.382,0-7.27-3.087-7.27-6.274v-.1c-3.685,4.083-8.763,6.773-16.132,6.773C1010.032,740.884,1001.768,735.108,1001.768,724.552Zm34.754-3.486v-2.689a23.486,23.486,0,0,0-9.66-1.992c-6.472,0-10.456,2.591-10.456,7.37v.2c0,4.083,3.386,6.474,8.266,6.474C1031.742,730.428,1036.522,726.544,1036.522,721.066Z" transform="translate(-829.548 -661.386)" fill="#030404"/>
+                            <line class="blink_me" id="Line_1" data-name="Line 1" x2="5.418" y2="7.456" transform="translate(169.588 15.309)" fill="none" stroke="#030404" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>
+                            <line class="blink_me" id="Line_2" data-name="Line 2" y1="7.457" x2="5.418" transform="translate(169.588 81.168)" fill="none" stroke="#ffbb16" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>
+                            <line class="blink_me" id="Line_3" data-name="Line 3" y1="17.92" transform="translate(196.222 88.062)" fill="none" stroke="#030404" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>
+                            <line class="blink_me" id="Line_4" data-name="Line 4" y1="17.92" transform="translate(195.709 0)" fill="none" stroke="#ffbb16" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>
+                            <line class="blink_me" id="Line_5" data-name="Line 5" x1="5.416" y1="7.457" transform="translate(217.439 81.168)" fill="none" stroke="#ffbb16" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>
+                            <line class="blink_me" id="Line_6" data-name="Line 6" x1="8.766" y1="2.849" transform="translate(230.549 63.122)" fill="none" stroke="#030404" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>
+                            <line class="blink_me" id="Line_7" data-name="Line 7" x1="8.766" y2="2.849" transform="translate(230.549 37.965)" fill="none" stroke="#ffbb16" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>
+                            <line class="blink_me" id="Line_8" data-name="Line 8" x1="5.416" y2="7.456" transform="translate(217.439 15.309)" fill="none" stroke="#030404" stroke-linecap="round" stroke-miterlimit="10" stroke-width="2"/>
+                            <text id="COMMUNICATING_INSIGHTS_ENGAGING_AUDIENCES" data-name="COMMUNICATING INSIGHTS | ENGAGING AUDIENCES" transform="translate(6.17 90.323)" fill="#1a1818" font-size="5" font-family=" Lato-Light, Lato;" font-weight="700"><tspan x="0" y="0">COMMUNICATING INSIGHTS | ENGAGING AUDIENCES</tspan></text>
+                            <text id="TM" transform="translate(233.214 15.867)" fill="#1a1818" font-size="5" font-family="Helvetica"><tspan x="0" y="0">TM</tspan></text>
+                          </g>
+                     
+                          <g id="Rectangle_4" data-name="Rectangle 4" transform="translate(1372.021 133)" fill="#ffbb16" stroke="#707070" stroke-width="1">
+                            <rect width="170" height="67" stroke="none"/>
+                            <rect x="0.5" y="0.5" width="169" height="66" fill="none"/>
+                          </g>
+                          <text id="LET_S_TALK" data-name="LET’S TALK" transform="translate(1398.021 174)" fill="#1a1818" font-size="21" font-family="Montserrat-Bold, Montserrat" font-weight="700"><tspan x="0" y="0">LET’S TALK</tspan></text>
+                          <path id="Path_9" data-name="Path 9" d="M1655.992,113h53.965" transform="translate(-42.979 41)" fill="none" stroke="#1a1818" stroke-width="4"/>
+                          <path id="Path_10" data-name="Path 10" d="M1669.3,113h40.656" transform="translate(-42.979 54)" fill="none" stroke="#1a1818" stroke-width="4"/>
+                          <path id="Path_11" data-name="Path 11" d="M1669.3,113h26.982" transform="translate(-29.305 67)" fill="none" stroke="#1a1818" stroke-width="4"/>
+                         
+                         
+                        <!--Menu Here-->                     
+                          <g id="Group_1514" data-name="Group 1514" transform="translate(265 -1)">
+                            <text id="Trainings" transform="translate(586 172)" fill="#030404" font-size="18px" font-family="Gotham-Rounded-Medium"><tspan x="0" y="0" onclick="menu1()" class="menu">Trainings</tspan></text>
+                            <text id="About_Us-2" data-name="About Us" transform="translate(706 172)" fill="#030404" font-size="18x" font-family="Gotham-Rounded-Medium"><tspan x="0" y="0" onclick="menu2()" class="menu">About Us</tspan></text>
+                            <text id="Our_Team" data-name="Our Team" transform="translate(830 172)" fill="#030404" font-size="18px" font-family="Gotham-Rounded-Medium"><tspan x="0" y="0" onclick="menu3()" class="menu">Our Team</tspan></text>
+                            <text id="Blog" transform="translate(957 172)" fill="#030404" font-size="18px" font-family="Gotham-Rounded-Medium"><tspan x="0" y="0" onclick="menu7()" class="menu">Blog</tspan></text>
+                        
+                        </g>
+                        <text id="The_Team" data-name="The Team" transform="translate(237 455)" fill="#030404" font-size="113" font-family="Montserrat-Bold, Montserrat" font-weight="700"><tspan x="0" y="0">The Team</tspan></text>
+                          <text id="Our_team_is_made_up_of_data_analysts_visual_designers_storytellers_programmers_who_have_a_proven_track_record_of_innovating_creating_and_pushing_the_limits_of_conventional_wisdom_in_design_when_working_with_clients_who_value_the_creative_process_func" data-name="Our team is made up of data analysts, visual designers, storytellers &amp; programmers who have a proven track record of innovating, creating and pushing the limits of conventional wisdom in design when working with clients who value the creative process, func" transform="translate(236 506)" fill="#030404" font-size="17" font-family="Montserrat-ExtraLight, Montserrat" font-weight="200"><tspan x="0" y="16">Our team is made up of data analysts, visual designers, storytellers &amp; programmers who have a proven track record of innovating, creating and </tspan><tspan x="0" y="36">pushing the limits of conventional wisdom in design when working with clients who value the creative process, functional design &amp; data integrity. </tspan><tspan x="0" y="56">Our expertise lies in our ability to extract and communicate valuable insights – even from the most challenging datasets across a broad spectrum </tspan><tspan x="0" y="76">of industries – with effortless ease. </tspan><tspan x="0" y="96"></tspan><tspan x="0" y="116">We believe that the most exciting &amp; functional designs come from a strong collaborative bond with our clients – and we have developed in-house </tspan><tspan x="0" y="136">processes to foster this bond.</tspan></text>
+                        </g>
+                        
+                      </svg>
+                   
+       <!-- FOTOGALLERY FANCYBOX BEGIN -->
+<div class="alboms">
+	
+    <div class="alboms__item">
+      <div class="alboms__itemPreview">
+        <img src="sayo2.jpg" />
+      </div>
+      <div class="alboms__itemCaption">
+        <h2>Folasayo Onigbinde</h2>
+        <p>Folasayo is a seasoned agile project manager with years of experience in managing both medium and Large Scale enterprise projects
+        </p>
+        <!-- <a class="alboms__button" href="https://goo.gl/RAe7sC" data-fancybox="gallery1" data-caption="картинка1">смотреть альбом</a>
+        <a class="" href="https://goo.gl/RAe7sC" data-fancybox="gallery1" data-caption="картинка2"></a>
+        <a class="" href="https://goo.gl/RAe7sC" data-fancybox="gallery1" data-caption="картинка3"></a> -->
+      </div>
+    </div>
+    <!-- alboms__item -->
+  
+    <div class="alboms__item">
+      <div class="alboms__itemPreview">
+        <img src="idris2.jpg" width="100%" height="100%" />
+      </div>
+      <div class="alboms__itemCaption">
+        <h2>Idris Ajibade</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptate distinctio, inventore impedit provident laboriosam porro sapiente optio suscipit. Nihil eius consequatur deleniti incidunt officia ipsa alias labore nobis qui.</p>
+        <!-- <a class="alboms__button" href="https://goo.gl/RAe7sC" data-fancybox="gallery2" data-caption="картинка1">смотреть альбом</a>
+        <a class="" href="https://goo.gl/RAe7sC" data-fancybox="gallery2" data-caption="картинка2"></a>
+        <a class="" href="https://goo.gl/RAe7sC" data-fancybox="gallery2" data-caption="картинка3"></a> -->
+      </div>
+    </div>
+    <!-- alboms__item -->
+  
+    <div class="alboms__item">
+      <div class="alboms__itemPreview">
+        <img src="tobi.png" />
+      </div>
+      <div class="alboms__itemCaption">
+        <h2>Babalola Oluwatobi</h2>
+        <p>Tobi Leads the software development and product Management for Fitila Africa. He also works as the DevOps person. And will be building the Front End </p>
+        <!-- <a class="alboms__button" href="https://goo.gl/RAe7sC" data-fancybox="gallery1" data-caption="картинка1">смотреть альбом</a>
+        <a class="" href="https://goo.gl/RAe7sC" data-fancybox="gallery1" data-caption="картинка2"></a>
+        <a class="" href="https://goo.gl/RAe7sC" data-fancybox="gallery1" data-caption="картинка3"></a> -->
+      </div>
+    </div>
+    <!-- alboms__item -->
+  
+    
+      <div class="alboms__item">
+      <div class="alboms__itemPreview">
+        <img src="adeola.jpg" />
+      </div>
+      <div class="alboms__itemCaption">
+        <h2>Adeola Fatoki</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptate distinctio, inventore impedit provident laboriosam porro sapiente optio suscipit. Nihil eius consequatur deleniti incidunt officia ipsa alias labore nobis qui.</p>
+        <!-- <a class="alboms__button" href="https://goo.gl/RAe7sC" data-fancybox="gallery1" data-caption="картинка1">смотреть альбом</a>
+        <a class="" href="https://goo.gl/RAe7sC" data-fancybox="gallery1" data-caption="картинка2"></a>
+        <a class="" href="https://goo.gl/RAe7sC" data-fancybox="gallery1" data-caption="картинка3"></a> -->
+      </div>
+    </div>
+    <!-- alboms__item -->
+    
+      <div class="alboms__item">
+      <div class="alboms__itemPreview">
+        <img src="tobi.png" />
+      </div>
+      <div class="alboms__itemCaption">
+        <h2>Kehinde Agbaje</h2>
+        <p>Kehinde is a fantastic designer and whenever he is not designer he will be seen mentoring the next generation of UI/UX designers
+        </p>
+        <!-- <a class="alboms__button" href="https://goo.gl/RAe7sC" data-fancybox="gallery1" data-caption="картинка1">смотреть альбом</a>
+        <a class="" href="https://goo.gl/RAe7sC" data-fancybox="gallery1" data-caption="картинка2"></a>
+        <a class="" href="https://goo.gl/RAe7sC" data-fancybox="gallery1" data-caption="картинка3"></a> -->
+      </div>
+    </div>
+    <!-- alboms__item -->
+    
+      <div class="alboms__item">
+      <div class="alboms__itemPreview">
+        <img src="tobi.png" />
+      </div>
+      <div class="alboms__itemCaption">
+        <h2>John Snow</h2>
+        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Pariatur voluptate distinctio, inventore impedit provident laboriosam porro sapiente optio suscipit. Nihil eius consequatur deleniti incidunt officia ipsa alias labore nobis qui.</p>
+        <!-- <a class="alboms__button" href="https://goo.gl/RAe7sC" data-fancybox="gallery1" data-caption="картинка1">смотреть альбом</a>
+        <a class="" href="https://goo.gl/RAe7sC" data-fancybox="gallery1" data-caption="картинка2"></a>
+        <a class="" href="https://goo.gl/RAe7sC" data-fancybox="gallery1" data-caption="картинка3"></a> -->
+      </div>
+    </div><!-- alboms__item -->
+    
+  </div><!-- alboms -->
+     <!--Footer Here-->
+  
+
+  <!-- FOTOGALLERY FANCYBOX END -->
+  <script>
+      function menu1(){
+      window.open('https://fitila.teachable.com/',"_blank");
+      }
+      function menu2(){
+      window.open('about.html',"_self");
+      }
+      function menu3(){
+      window.open('team.html',"_self");
+      }
+      function menu4(){
+      window.open('https://facebook.com/FitilaAfrica',"_blank");
+      }
+      function menu5(){
+      window.open('https://twitter.com/FitilaAfrica',"_blank");
+      }
+      function menu6(){
+      window.open('business@fitila.africa',"_blank");
+      }
+      function menu7(){
+      window.open('blog.html',"_self");
+      }
+
+        </script>
+  
+
+</body>
+</html>

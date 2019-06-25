@@ -1,0 +1,637 @@
+(window["webpackJsonp"] = window["webpackJsonp"] || []).push([[79],{
+
+/***/ "../../libs/shared/src/lib/collapse/collapse.directive.ts":
+/*!*********************************************************************************!*\
+  !*** /home/circleci/iridium/libs/shared/src/lib/collapse/collapse.directive.ts ***!
+  \*********************************************************************************/
+/*! exports provided: CollapseDirective */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CollapseDirective", function() { return CollapseDirective; });
+var CollapseDirective = /** @class */ /*@__PURE__*/ (function () {
+    function CollapseDirective() {
+        // shown
+        this.isExpanded = true;
+        // hidden
+        this.isCollapsed = false;
+        // stale state
+        this.isCollapse = true;
+        // animation state
+        this.isCollapsing = false;
+    }
+    Object.defineProperty(CollapseDirective.prototype, "irCollapse", {
+        get: function () {
+            return this.isExpanded;
+        },
+        set: function (value) {
+            this.isExpanded = value;
+            this.toggle();
+        },
+        enumerable: true,
+        configurable: true
+    });
+    CollapseDirective.prototype.toggle = function () {
+        if (this.isExpanded) {
+            this.hide();
+        }
+        else {
+            this.show();
+        }
+    };
+    CollapseDirective.prototype.hide = function () {
+        this.height = '0';
+        this.isCollapse = true;
+        this.isCollapsing = false;
+        this.isExpanded = false;
+        this.isCollapsed = true;
+    };
+    CollapseDirective.prototype.show = function () {
+        this.height = 'auto';
+        this.isCollapse = true;
+        this.isCollapsing = false;
+        this.isExpanded = true;
+        this.isCollapsed = false;
+    };
+    return CollapseDirective;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../libs/shared/src/lib/defer-video/defer-video.directive.ts":
+/*!***************************************************************************************!*\
+  !*** /home/circleci/iridium/libs/shared/src/lib/defer-video/defer-video.directive.ts ***!
+  \***************************************************************************************/
+/*! exports provided: DeferVideoDirective */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DeferVideoDirective", function() { return DeferVideoDirective; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/common */ "../../node_modules/@angular/common/fesm5/common.js");
+
+
+var DeferVideoDirective = /** @class */ /*@__PURE__*/ (function () {
+    function DeferVideoDirective(platformId) {
+        this.platformId = platformId;
+        this.src = '';
+    }
+    DeferVideoDirective.prototype.ngOnInit = function () {
+        // do not set the element src if enviroment is not browser
+        // used "a la carte" to save bandwidth
+        if (!Object(_angular_common__WEBPACK_IMPORTED_MODULE_1__["isPlatformBrowser"])(this.platformId)) {
+            return;
+        }
+        this.src = this.deferVideoSrc;
+    };
+    return DeferVideoDirective;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../libs/shared/src/lib/experiment/experiment-variant.directive.ts":
+/*!*********************************************************************************************!*\
+  !*** /home/circleci/iridium/libs/shared/src/lib/experiment/experiment-variant.directive.ts ***!
+  \*********************************************************************************************/
+/*! exports provided: ExperimentVariantDirective */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ExperimentVariantDirective", function() { return ExperimentVariantDirective; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _experiment_view_class__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./experiment-view.class */ "../../libs/shared/src/lib/experiment/experiment-view.class.ts");
+/* harmony import */ var _experiment_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./experiment.component */ "../../libs/shared/src/lib/experiment/experiment.component.ts");
+
+
+
+var ExperimentVariantDirective = /** @class */ /*@__PURE__*/ (function () {
+    function ExperimentVariantDirective(viewContainer, templateRef, experimentContext) {
+        this.experimentContext = experimentContext;
+        experimentContext.addExperimentView(this);
+        this.view = new _experiment_view_class__WEBPACK_IMPORTED_MODULE_1__["ExperimentView"](viewContainer, templateRef);
+    }
+    Object.defineProperty(ExperimentVariantDirective.prototype, "irExperimentVariant", {
+        set: function (newValue) {
+            this.variantId = newValue;
+        },
+        enumerable: true,
+        configurable: true
+    });
+    ExperimentVariantDirective.prototype.ngDoCheck = function () {
+        this.refreshVisibility();
+    };
+    ExperimentVariantDirective.prototype.refreshVisibility = function () {
+        // Show or hide
+        this.view.enforceState(
+        // Based on whether or not the variant is currently active
+        this.experimentContext.checkIsActiveVariant(this.variantId));
+    };
+    return ExperimentVariantDirective;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../libs/shared/src/lib/experiment/experiment-view.class.ts":
+/*!**************************************************************************************!*\
+  !*** /home/circleci/iridium/libs/shared/src/lib/experiment/experiment-view.class.ts ***!
+  \**************************************************************************************/
+/*! exports provided: ExperimentView */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ExperimentView", function() { return ExperimentView; });
+// Based heavily on the SwitchView class in the Angular core's NgSwitch directive
+// https://github.com/angular/angular/blob/5.2.2/packages/common/src/directives/ng_switch.ts#L11-L34
+var ExperimentView = /** @class */ /*@__PURE__*/ (function () {
+    function ExperimentView(_viewContainerRef, _templateRef) {
+        this._viewContainerRef = _viewContainerRef;
+        this._templateRef = _templateRef;
+        this._created = false;
+    }
+    ExperimentView.prototype.create = function () {
+        this._created = true;
+        this._viewContainerRef.createEmbeddedView(this._templateRef);
+    };
+    ExperimentView.prototype.destroy = function () {
+        this._created = false;
+        this._viewContainerRef.clear();
+    };
+    ExperimentView.prototype.enforceState = function (created) {
+        if (created && !this._created) {
+            this.create();
+        }
+        else if (!created && this._created) {
+            this.destroy();
+        }
+    };
+    return ExperimentView;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../libs/shared/src/lib/experiment/experiment.component.ngfactory.js":
+/*!***********************************************************************************************!*\
+  !*** /home/circleci/iridium/libs/shared/src/lib/experiment/experiment.component.ngfactory.js ***!
+  \***********************************************************************************************/
+/*! exports provided: RenderType_ExperimentComponent, View_ExperimentComponent_0, View_ExperimentComponent_Host_0, ExperimentComponentNgFactory */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RenderType_ExperimentComponent", function() { return RenderType_ExperimentComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "View_ExperimentComponent_0", function() { return View_ExperimentComponent_0; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "View_ExperimentComponent_Host_0", function() { return View_ExperimentComponent_Host_0; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ExperimentComponentNgFactory", function() { return ExperimentComponentNgFactory; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _experiment_component__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./experiment.component */ "../../libs/shared/src/lib/experiment/experiment.component.ts");
+/* harmony import */ var _core_src_lib_services_experiment_experiment_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../core/src/lib/services/experiment/experiment.service */ "../../libs/core/src/lib/services/experiment/experiment.service.ts");
+/**
+ * @fileoverview This file was generated by the Angular template compiler. Do not edit.
+ *
+ * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride,checkTypes}
+ * tslint:disable
+ */
+/** PURE_IMPORTS_START _angular_core,_experiment.component,_.._.._.._core_src_lib_services_experiment_experiment.service PURE_IMPORTS_END */
+/** PURE_IMPORTS_START _angular_core,_experiment.component,_.._.._.._core_src_lib_services_experiment_experiment.service PURE_IMPORTS_END */
+
+
+
+var styles_ExperimentComponent = [];
+var RenderType_ExperimentComponent = /*@__PURE__*/ /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵcrt"]({ encapsulation: 2, styles: styles_ExperimentComponent, data: {} });
+
+function View_ExperimentComponent_0(_l) { return _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵvid"](0, [_angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵncd"](null, 0)], null, null); }
+function View_ExperimentComponent_Host_0(_l) { return _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵeld"](0, 0, null, null, 1, "ir-experiment", [], null, null, null, View_ExperimentComponent_0, RenderType_ExperimentComponent)), _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵdid"](1, 49152, null, 0, _experiment_component__WEBPACK_IMPORTED_MODULE_1__["ExperimentComponent"], [_core_src_lib_services_experiment_experiment_service__WEBPACK_IMPORTED_MODULE_2__["ExperimentDataService"]], null, null)], null, null); }
+var ExperimentComponentNgFactory = /*@__PURE__*/ /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_0__["ɵccf"]("ir-experiment", _experiment_component__WEBPACK_IMPORTED_MODULE_1__["ExperimentComponent"], View_ExperimentComponent_Host_0, { experimentId: "experimentId" }, {}, ["*"]);
+
+
+
+/***/ }),
+
+/***/ "../../libs/shared/src/lib/experiment/experiment.component.ts":
+/*!*************************************************************************************!*\
+  !*** /home/circleci/iridium/libs/shared/src/lib/experiment/experiment.component.ts ***!
+  \*************************************************************************************/
+/*! exports provided: ExperimentComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ExperimentComponent", function() { return ExperimentComponent; });
+/* harmony import */ var _core_src_lib_services_experiment_experiment_service__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../core/src/lib/services/experiment/experiment.service */ "../../libs/core/src/lib/services/experiment/experiment.service.ts");
+
+var ExperimentComponent = /** @class */ /*@__PURE__*/ (function () {
+    function ExperimentComponent(experimentDataService) {
+        this.experimentDataService = experimentDataService;
+        // Visibility state info
+        this.views = [];
+        this.lastCaseCheckIndex = 0;
+        this.lastCasesMatched = false;
+    }
+    Object.defineProperty(ExperimentComponent.prototype, "experimentId", {
+        set: function (newValue) {
+            var _this = this;
+            if (this.experimentData$) {
+                this.experimentData$.unsubscribe();
+            }
+            this._experimentId = newValue;
+            this.experimentData$ = this.experimentDataService
+                .getVariant(this._experimentId)
+                .subscribe(function (variant) {
+                _this.experimentVariant = variant;
+                _this.views.forEach(function (v) {
+                    v.refreshVisibility();
+                });
+            });
+        },
+        enumerable: true,
+        configurable: true
+    });
+    // Callable by child directives
+    ExperimentComponent.prototype.addExperimentView = function (view) {
+        this.views.push(view);
+    };
+    // Callable by child directives
+    ExperimentComponent.prototype.checkIsActiveVariant = function (value) {
+        var matched = value === this.experimentVariant;
+        // Accumulator to determine if all experiment views have been checked,
+        // since child directives are responsible for checking themselves via
+        // an Angular lifecycle event
+        this.lastCasesMatched = this.lastCasesMatched || matched;
+        this.lastCaseCheckIndex++;
+        // On last view
+        if (this.lastCaseCheckIndex === this.views.length) {
+            // None of them have matched
+            if (!this.lastCasesMatched) {
+                // Force all Control variants to be visible
+                this.views
+                    .filter(function (v) {
+                    return v.variantId === _core_src_lib_services_experiment_experiment_service__WEBPACK_IMPORTED_MODULE_0__["ExperimentDataService"].CONTROL_VARIANT_ID;
+                })
+                    .forEach(function (v) {
+                    v.view.enforceState(true);
+                });
+                // Override matched in case the currently checked view is Control,
+                // so that we don't end up overwriting it as hidden
+                matched = value === _core_src_lib_services_experiment_experiment_service__WEBPACK_IMPORTED_MODULE_0__["ExperimentDataService"].CONTROL_VARIANT_ID;
+            }
+            this.lastCaseCheckIndex = 0;
+            this.lastCasesMatched = false;
+        }
+        return matched;
+    };
+    return ExperimentComponent;
+}());
+
+
+
+/***/ }),
+
+/***/ "../../libs/shared/src/lib/horizontal-scroller/horizontal-scroller.component.ngfactory.js":
+/*!*****************************************************************************************************************!*\
+  !*** /home/circleci/iridium/libs/shared/src/lib/horizontal-scroller/horizontal-scroller.component.ngfactory.js ***!
+  \*****************************************************************************************************************/
+/*! exports provided: RenderType_HorizontalScrollerComponent, View_HorizontalScrollerComponent_0, View_HorizontalScrollerComponent_Host_0, HorizontalScrollerComponentNgFactory */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "RenderType_HorizontalScrollerComponent", function() { return RenderType_HorizontalScrollerComponent; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "View_HorizontalScrollerComponent_0", function() { return View_HorizontalScrollerComponent_0; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "View_HorizontalScrollerComponent_Host_0", function() { return View_HorizontalScrollerComponent_Host_0; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HorizontalScrollerComponentNgFactory", function() { return HorizontalScrollerComponentNgFactory; });
+/* harmony import */ var _horizontal_scroller_component_scss_shim_ngstyle__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./horizontal-scroller.component.scss.shim.ngstyle */ "../../libs/shared/src/lib/horizontal-scroller/horizontal-scroller.component.scss.shim.ngstyle.js");
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _horizontal_scroller_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./horizontal-scroller.component */ "../../libs/shared/src/lib/horizontal-scroller/horizontal-scroller.component.ts");
+/* harmony import */ var _core_src_lib_services_window_ref_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../core/src/lib/services/window-ref.service */ "../../libs/core/src/lib/services/window-ref.service.ts");
+/**
+ * @fileoverview This file was generated by the Angular template compiler. Do not edit.
+ *
+ * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride,checkTypes}
+ * tslint:disable
+ */
+/** PURE_IMPORTS_START _horizontal_scroller.component.scss.shim.ngstyle,_angular_core,_horizontal_scroller.component,_.._.._.._core_src_lib_services_window_ref.service PURE_IMPORTS_END */
+/** PURE_IMPORTS_START _horizontal_scroller.component.scss.shim.ngstyle,_angular_core,_horizontal_scroller.component,_.._.._.._core_src_lib_services_window_ref.service PURE_IMPORTS_END */
+
+
+
+
+var styles_HorizontalScrollerComponent = [_horizontal_scroller_component_scss_shim_ngstyle__WEBPACK_IMPORTED_MODULE_0__["styles"]];
+var RenderType_HorizontalScrollerComponent = /*@__PURE__*/ /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵcrt"]({ encapsulation: 0, styles: styles_HorizontalScrollerComponent, data: {} });
+
+function View_HorizontalScrollerComponent_0(_l) {
+    return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵqud"](402653184, 1, { scrollerRef: 0 }), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵqud"](402653184, 2, { handleRef: 0 }), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](2, 0, [[1, 0], ["scroller", 1]], null, 1, "div", [["class", "scroller"]], [[4, "transform", null], [2, "dragging", null]], [[null, "mousedown"], [null, "touchstart"]], function (_v, en, $event) {
+            var ad = true;
+            var _co = _v.component;
+            if (("mousedown" === en)) {
+                var pd_0 = (_co.trackPointerDown($event) !== false);
+                ad = (pd_0 && ad);
+            }
+            if (("touchstart" === en)) {
+                var pd_1 = (_co.trackPointerDown($event) !== false);
+                ad = (pd_1 && ad);
+            }
+            return ad;
+        }, null, null)), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵncd"](null, 0), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](4, 0, null, null, 1, "div", [["class", "scrollbar"]], [[2, "dragging", null], [2, "hidden", null]], null, null, null, null)), (_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](5, 0, [[2, 0], ["handle", 1]], null, 0, "div", [["class", "handle"]], [[4, "width", "px"], [4, "transform", null], [2, "dragging", null]], [[null, "mousedown"], [null, "touchstart"]], function (_v, en, $event) {
+            var ad = true;
+            var _co = _v.component;
+            if (("mousedown" === en)) {
+                var pd_0 = (_co.trackPointerDown($event) !== false);
+                ad = (pd_0 && ad);
+            }
+            if (("touchstart" === en)) {
+                var pd_1 = (_co.trackPointerDown($event) !== false);
+                ad = (pd_1 && ad);
+            }
+            return ad;
+        }, null, null))], null, function (_ck, _v) { var _co = _v.component; var currVal_0 = _co.scrollerTransform; var currVal_1 = _co.isPointerDown; _ck(_v, 2, 0, currVal_0, currVal_1); var currVal_2 = _co.isPointerDown; var currVal_3 = !_co.shouldScroll; _ck(_v, 4, 0, currVal_2, currVal_3); var currVal_4 = _co.handleWidth; var currVal_5 = _co.handleTransform; var currVal_6 = _co.isPointerDown; _ck(_v, 5, 0, currVal_4, currVal_5, currVal_6); });
+}
+function View_HorizontalScrollerComponent_Host_0(_l) {
+    return _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵvid"](0, [(_l()(), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵeld"](0, 0, null, null, 1, "ir-horizontal-scroller", [], null, [["document", "touchmove"], ["document", "mousemove"], ["document", "touchend"], ["document", "mouseup"], ["window", "resize"], [null, "wheel"]], function (_v, en, $event) {
+            var ad = true;
+            if (("document:touchmove" === en)) {
+                var pd_0 = (_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 1).trackPointerMove($event) !== false);
+                ad = (pd_0 && ad);
+            }
+            if (("document:mousemove" === en)) {
+                var pd_1 = (_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 1).trackPointerMove($event) !== false);
+                ad = (pd_1 && ad);
+            }
+            if (("document:touchend" === en)) {
+                var pd_2 = (_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 1).trackPointerUp() !== false);
+                ad = (pd_2 && ad);
+            }
+            if (("document:mouseup" === en)) {
+                var pd_3 = (_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 1).trackPointerUp() !== false);
+                ad = (pd_3 && ad);
+            }
+            if (("window:resize" === en)) {
+                var pd_4 = (_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 1).onWindowResize() !== false);
+                ad = (pd_4 && ad);
+            }
+            if (("wheel" === en)) {
+                var pd_5 = (_angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵnov"](_v, 1).onHostWheel($event) !== false);
+                ad = (pd_5 && ad);
+            }
+            return ad;
+        }, View_HorizontalScrollerComponent_0, RenderType_HorizontalScrollerComponent)), _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵdid"](1, 4308992, null, 0, _horizontal_scroller_component__WEBPACK_IMPORTED_MODULE_2__["HorizontalScrollerComponent"], [_angular_core__WEBPACK_IMPORTED_MODULE_1__["ElementRef"], _angular_core__WEBPACK_IMPORTED_MODULE_1__["PLATFORM_ID"], _core_src_lib_services_window_ref_service__WEBPACK_IMPORTED_MODULE_3__["WindowRefService"]], null, null)], function (_ck, _v) { _ck(_v, 1, 0); }, null);
+}
+var HorizontalScrollerComponentNgFactory = /*@__PURE__*/ /*@__PURE__*/ _angular_core__WEBPACK_IMPORTED_MODULE_1__["ɵccf"]("ir-horizontal-scroller", _horizontal_scroller_component__WEBPACK_IMPORTED_MODULE_2__["HorizontalScrollerComponent"], View_HorizontalScrollerComponent_Host_0, {}, {}, ["*"]);
+
+
+
+/***/ }),
+
+/***/ "../../libs/shared/src/lib/horizontal-scroller/horizontal-scroller.component.scss.shim.ngstyle.js":
+/*!*************************************************************************************************************************!*\
+  !*** /home/circleci/iridium/libs/shared/src/lib/horizontal-scroller/horizontal-scroller.component.scss.shim.ngstyle.js ***!
+  \*************************************************************************************************************************/
+/*! exports provided: styles */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "styles", function() { return styles; });
+/**
+ * @fileoverview This file was generated by the Angular template compiler. Do not edit.
+ *
+ * @suppress {suspiciousCode,uselessCode,missingProperties,missingOverride,checkTypes}
+ * tslint:disable
+ */
+/** PURE_IMPORTS_START  PURE_IMPORTS_END */
+/** PURE_IMPORTS_START  PURE_IMPORTS_END */
+var styles = ["html[_ngcontent-%COMP%] {\n  box-sizing: border-box; }\n\n*[_ngcontent-%COMP%], *[_ngcontent-%COMP%]::after, *[_ngcontent-%COMP%]::before {\n  box-sizing: inherit; }\n\n\n\nhtml.wf-loading[_ngcontent-%COMP%]   .tk-font[_ngcontent-%COMP%] {\n  visibility: hidden; }\n\nhtml.wf-active[_ngcontent-%COMP%]   .tk-font[_ngcontent-%COMP%] {\n  visibility: initial; }\n\n\n\n.tk-font-balboa[_ngcontent-%COMP%] {\n  font-family: balboa, 'Open Sans', sans-serif; }\n\n.tk-font-balboa-condensed[_ngcontent-%COMP%] {\n  font-family: balboa-extra-condensed, 'Open Sans', sans-serif; }\n\n.invisible[_ngcontent-%COMP%] {\n  visibility: hidden !important; }\n\n.hide[_ngcontent-%COMP%] {\n  display: none !important; }\n\n.show[_ngcontent-%COMP%] {\n  display: block !important; }\n\n.sr-only[_ngcontent-%COMP%] {\n  height: 1px;\n  width: 1px;\n  overflow: hidden;\n  position: absolute !important;\n  clip: rect(1px, 1px, 1px, 1px); }\n\n.hidden-xs-up[_ngcontent-%COMP%] {\n  display: none !important; }\n\n@media (max-width: 479px) {\n  .hidden-xs-down[_ngcontent-%COMP%] {\n    display: none !important; } }\n\n@media (min-width: 480px) {\n  .hidden-sm-up[_ngcontent-%COMP%] {\n    display: none !important; } }\n\n@media (max-width: 767px) {\n  .hidden-sm-down[_ngcontent-%COMP%] {\n    display: none !important; } }\n\n@media (min-width: 768px) {\n  .hidden-md-up[_ngcontent-%COMP%] {\n    display: none !important; } }\n\n@media (max-width: 991px) {\n  .hidden-md-down[_ngcontent-%COMP%] {\n    display: none !important; } }\n\n@media (min-width: 992px) {\n  .hidden-lg-up[_ngcontent-%COMP%] {\n    display: none !important; } }\n\n@media (max-width: 1179px) {\n  .hidden-lg-down[_ngcontent-%COMP%] {\n    display: none !important; } }\n\n@media (min-width: 1180px) {\n  .hidden-xl-up[_ngcontent-%COMP%] {\n    display: none !important; } }\n\n.hidden-xl-down[_ngcontent-%COMP%] {\n  display: none !important; }\n\n.visible-print-block[_ngcontent-%COMP%] {\n  display: none !important; }\n\n@media print {\n    .visible-print-block[_ngcontent-%COMP%] {\n      display: block !important; } }\n\n.visible-print-inline[_ngcontent-%COMP%] {\n  display: none !important; }\n\n@media print {\n    .visible-print-inline[_ngcontent-%COMP%] {\n      display: inline !important; } }\n\n.visible-print-inline-block[_ngcontent-%COMP%] {\n  display: none !important; }\n\n@media print {\n    .visible-print-inline-block[_ngcontent-%COMP%] {\n      display: inline-block !important; } }\n\n@media print {\n  .hidden-print[_ngcontent-%COMP%] {\n    display: none !important; } }\n\n[_nghost-%COMP%] {\n  display: block;\n  position: relative;\n  padding-bottom: 1rem; }\n\n.scroller[_ngcontent-%COMP%] {\n  outline: none;\n  padding: 4.5rem 0;\n  width: 9999em; }\n\n.scroller[_ngcontent-%COMP%]::after {\n    clear: both;\n    content: \"\";\n    display: table; }\n\n@media screen and (max-width: 48rem) {\n    .scroller[_ngcontent-%COMP%] {\n      padding: 3.5rem 0; } }\n\n.page-chitkara[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], .page-chitkara   [_nghost-%COMP%]   .scroller[_ngcontent-%COMP%] {\n  height: 20rem; }\n\n.scrollbar[_ngcontent-%COMP%] {\n  width: 100%;\n  background: #bcc9d4;\n  height: 0.2rem;\n  position: relative; }\n\n.handle[_ngcontent-%COMP%] {\n  position: absolute;\n  width: 100px;\n  height: 0.6rem;\n  background: #02b3e4;\n  cursor: pointer;\n  cursor: -webkit-grab;\n  top: -0.2rem;\n  border-radius: 0.3rem; }\n\n.dragging[_ngcontent-%COMP%] {\n  cursor: pointer;\n  cursor: -webkit-grabbing;\n  -webkit-user-select: none;\n     -moz-user-select: none;\n      -ms-user-select: none;\n          user-select: none; }\n\n.hidden[_ngcontent-%COMP%] {\n  display: none; }\n\n.page-nanodegree[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], .page-nanodegree   [_nghost-%COMP%]   .scroller[_ngcontent-%COMP%] {\n  height: 37rem; }\n\n@media screen and (max-width: 48rem) {\n    .page-nanodegree[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], .page-nanodegree   [_nghost-%COMP%]   .scroller[_ngcontent-%COMP%] {\n      height: 24.5rem; } }\n\n.page-nanodegree.page-in[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], .page-nanodegree.page-in   [_nghost-%COMP%]   .scroller[_ngcontent-%COMP%] {\n  height: 24.5rem; }\n\nir-syllabus-list[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], ir-syllabus-list   [_nghost-%COMP%]   .scroller[_ngcontent-%COMP%] {\n  height: 38rem; }\n\n@media screen and (max-width: 48rem) {\n    ir-syllabus-list[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], ir-syllabus-list   [_nghost-%COMP%]   .scroller[_ngcontent-%COMP%] {\n      height: 27rem; } }\n\n.hire_talent_blog[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], .hire_talent_blog   [_nghost-%COMP%]   .scroller[_ngcontent-%COMP%] {\n  height: 22rem;\n  padding: 0; }\n\n.page-events[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], .page-events   [_nghost-%COMP%]   .scroller[_ngcontent-%COMP%] {\n  height: auto; }\n\n.no-padding[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%] {\n  height: auto;\n  padding: 0;\n  margin-top: 0;\n  margin-bottom: 1.5rem; }\n\n@media screen and (min-width: 48rem) {\n    .no-padding[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%] {\n      margin-bottom: 1.5rem; } }\n\n.no-padding[_nghost-%COMP%]   .scrollbar[_ngcontent-%COMP%] {\n  margin: 1rem 0; }\n\n.career-prospect-component[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], .career-prospect-component   [_nghost-%COMP%]   .scroller[_ngcontent-%COMP%] {\n  padding: 0;\n  margin-top: 0;\n  margin-bottom: 1.5rem;\n  height: auto; }\n\n@media screen and (min-width: 48rem) {\n    .career-prospect-component[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], .career-prospect-component   [_nghost-%COMP%]   .scroller[_ngcontent-%COMP%] {\n      margin-bottom: 1.5rem; } }\n\n.career-prospect-component[_nghost-%COMP%]   .scrollbar[_ngcontent-%COMP%], .career-prospect-component   [_nghost-%COMP%]   .scrollbar[_ngcontent-%COMP%] {\n  display: none; }\n\n.no-padding-top[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], .no-padding-top   [_nghost-%COMP%]   .scroller[_ngcontent-%COMP%] {\n  padding-top: 0; }\n\n.take-charge-scroller[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], .take-charge-scroller   [_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], .home-in-track-scroller[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], .home-in-track-scroller   [_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], .home-in-community-scroller[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], .home-in-community-scroller   [_nghost-%COMP%]   .scroller[_ngcontent-%COMP%] {\n  padding: 0; }\n\n.take-charge-scroller[_nghost-%COMP%]   .scrollbar[_ngcontent-%COMP%], .take-charge-scroller   [_nghost-%COMP%]   .scrollbar[_ngcontent-%COMP%], .home-in-track-scroller[_nghost-%COMP%]   .scrollbar[_ngcontent-%COMP%], .home-in-track-scroller   [_nghost-%COMP%]   .scrollbar[_ngcontent-%COMP%], .home-in-community-scroller[_nghost-%COMP%]   .scrollbar[_ngcontent-%COMP%], .home-in-community-scroller   [_nghost-%COMP%]   .scrollbar[_ngcontent-%COMP%] {\n  display: none; }\n\n.no-padding-bottom[_nghost-%COMP%]   .scroller[_ngcontent-%COMP%], .no-padding-bottom   [_nghost-%COMP%]   .scroller[_ngcontent-%COMP%] {\n  padding-bottom: 0; }"];
+
+
+
+/***/ }),
+
+/***/ "../../libs/shared/src/lib/horizontal-scroller/horizontal-scroller.component.ts":
+/*!*******************************************************************************************************!*\
+  !*** /home/circleci/iridium/libs/shared/src/lib/horizontal-scroller/horizontal-scroller.component.ts ***!
+  \*******************************************************************************************************/
+/*! exports provided: HorizontalScrollerComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "HorizontalScrollerComponent", function() { return HorizontalScrollerComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "../../node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _iridium_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @iridium/core */ "../../libs/core/src/index.ts");
+/* harmony import */ var _angular_common__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common */ "../../node_modules/@angular/common/fesm5/common.js");
+/* harmony import */ var _iridium_shared_utils__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @iridium/shared/utils */ "../../libs/shared/utils/src/index.ts");
+
+
+
+
+var HorizontalScrollerComponent = /** @class */ /*@__PURE__*/ (function () {
+    function HorizontalScrollerComponent(elRef, platformId, windowRef) {
+        this.elRef = elRef;
+        this.platformId = platformId;
+        this.windowRef = windowRef;
+        this.pointerDownTarget = undefined;
+        this.scrollPos = 0;
+        this.handlePos = 0;
+        this.width = 0;
+        this.maxScroll = 0;
+        this.maxHandleScroll = 0;
+        this.currentX = 0;
+        this.isTouch = false;
+        this.isPointerDown = false;
+        this.shouldScroll = true;
+        this.startTime = 0;
+        this.endTime = 0;
+        this.startX = 0;
+        this.endX = 0;
+        this.handleWidth = 0;
+        this.scrollerTransform = '';
+        this.handleTransform = '';
+        this._resetMeasurements = this.resetMeasurements.bind(this);
+    }
+    HorizontalScrollerComponent.prototype.ngOnInit = function () {
+        if (!Object(_angular_common__WEBPACK_IMPORTED_MODULE_2__["isPlatformBrowser"])(this.platformId)) {
+            return;
+        }
+        this.host = this.elRef.nativeElement;
+        this.scroller = this.scrollerRef.nativeElement;
+        this.handle = this.handleRef.nativeElement;
+        this.window = this.windowRef.nativeWindow;
+        this.isTouch = 'ontouchstart' in this.window.document;
+    };
+    HorizontalScrollerComponent.prototype.ngAfterViewInit = function () {
+        if (!Object(_angular_common__WEBPACK_IMPORTED_MODULE_2__["isPlatformBrowser"])(this.platformId)) {
+            return;
+        }
+        // waits for 1st paint
+        this.window.requestAnimationFrame(this._resetMeasurements);
+    };
+    HorizontalScrollerComponent.prototype.getWidth = function (el) {
+        if (!el) {
+            return 0;
+        }
+        var styles = this.window.getComputedStyle(el);
+        return [
+            parseInt(styles.marginLeft, 10),
+            parseInt(styles.marginRight, 10),
+            el.offsetWidth
+        ].reduce(function (a, b) { return a + b; });
+    };
+    HorizontalScrollerComponent.prototype.getX = function (e) {
+        if (this.isTouch) {
+            return Object(_iridium_shared_utils__WEBPACK_IMPORTED_MODULE_3__["getIn"])(e, ['touches', 0, 'pageX'], 0);
+        }
+        return e.pageX;
+    };
+    HorizontalScrollerComponent.prototype.trackPointerDown = function (e) {
+        if (!this.shouldScroll) {
+            return;
+        }
+        this.startTime = Date.now();
+        this.isPointerDown = true;
+        this.startX = this.currentX = this.getX(e);
+        this.pointerDownTarget = e.currentTarget;
+    };
+    HorizontalScrollerComponent.prototype.trackPointerMove = function (e) {
+        if (!this.isPointerDown || !this.pointerDownTarget) {
+            return;
+        }
+        var x = this.getX(e);
+        if (this.pointerDownTarget === this.handle) {
+            this.clampHandle(x - this.currentX);
+            this.scrollPosFromHandle();
+        }
+        else if (this.pointerDownTarget === this.scroller) {
+            this.clampScroller(-(x - this.currentX));
+            this.handlePosFromScroller();
+        }
+        this.endX = this.currentX = x;
+        this.endTime = Date.now();
+        this.move();
+    };
+    HorizontalScrollerComponent.prototype.trackPointerUp = function () {
+        if (!this.isPointerDown) {
+            return;
+        }
+        this.isPointerDown = false;
+        var pointerDown = this.pointerDownTarget;
+        this.pointerDownTarget = undefined;
+        if (pointerDown !== this.scroller) {
+            return;
+        }
+        var deltaX = this.endX - this.startX;
+        var speed = -16 * deltaX / (this.endTime - this.startTime);
+        this.endTime = this.startTime = this.endX = this.startX = 0;
+        if (Math.abs(speed) >= 5) {
+            this.moveInertia(speed);
+        }
+    };
+    HorizontalScrollerComponent.prototype.onWindowResize = function () {
+        this.window.requestAnimationFrame(this._resetMeasurements);
+    };
+    HorizontalScrollerComponent.prototype.resetMeasurements = function () {
+        var _this = this;
+        var width = this.host.offsetWidth;
+        if (this.width === width) {
+            // if there was no change in width, why bother resetting?
+            // particularly important for mobiles that fire window resize
+            // every time navigation bar is shown/hidden
+            return;
+        }
+        this.width = width;
+        var scrollerWidth = Array.from(this.scroller.children).reduce(function (n, el) {
+            return n + _this.getWidth(el);
+        }, 0);
+        this.handleWidth = Math.floor(width * width / scrollerWidth);
+        this.maxScroll = width - scrollerWidth;
+        this.maxHandleScroll = width - this.handleWidth;
+        this.handlePos = this.scrollPos = 0;
+        if (scrollerWidth <= width) {
+            this.shouldScroll = false;
+            this.centerContent();
+        }
+        else {
+            this.shouldScroll = true;
+            this.move();
+        }
+    };
+    HorizontalScrollerComponent.prototype.clampScroller = function (val) {
+        // clamp scroll
+        this.scrollPos -= val;
+        if (this.scrollPos > 0) {
+            this.scrollPos = 0;
+        }
+        else if (this.scrollPos < this.maxScroll) {
+            this.scrollPos = this.maxScroll;
+        }
+    };
+    HorizontalScrollerComponent.prototype.clampHandle = function (val) {
+        this.handlePos += val;
+        if (this.handlePos < 0) {
+            this.handlePos = 0;
+        }
+        else if (this.handlePos > this.maxHandleScroll) {
+            this.handlePos = this.maxHandleScroll;
+        }
+    };
+    HorizontalScrollerComponent.prototype.move = function () {
+        var _this = this;
+        this.window.requestAnimationFrame(function () {
+            _this.scrollerTransform = "translate3d(" + _this.scrollPos + "px,0,0)";
+            _this.handleTransform = "translate3d(" + _this.handlePos + "px,0,0)";
+        });
+    };
+    HorizontalScrollerComponent.prototype.centerContent = function () {
+        this.scrollPos = this.maxScroll / 2;
+        this.move();
+    };
+    HorizontalScrollerComponent.prototype.handlePosFromScroller = function () {
+        this.handlePos = this.maxHandleScroll * this.scrollPos / this.maxScroll;
+    };
+    HorizontalScrollerComponent.prototype.scrollPosFromHandle = function () {
+        this.scrollPos = this.maxScroll * this.handlePos / this.maxHandleScroll;
+    };
+    HorizontalScrollerComponent.prototype.onHostWheel = function (e) {
+        // this way it won't affect vertical scroll
+        if (Math.abs(e.deltaX) < Math.abs(e.deltaY) ||
+            this.isPointerDown ||
+            !this.shouldScroll) {
+            return;
+        }
+        e.preventDefault();
+        this.clampScroller(e.deltaX);
+        this.handlePosFromScroller();
+        this.move();
+    };
+    HorizontalScrollerComponent.prototype.moveInertia = function (speed) {
+        var _this = this;
+        if (this.isPointerDown) {
+            return;
+        }
+        this.clampScroller(speed);
+        this.handlePosFromScroller();
+        this.move();
+        var inertia = 0.95;
+        var nextSpeed = speed * inertia;
+        if (Math.abs(nextSpeed) > 0.5) {
+            this.window.requestAnimationFrame(function () { return _this.moveInertia(nextSpeed); });
+        }
+    };
+    return HorizontalScrollerComponent;
+}());
+
+
+
+/***/ })
+
+}]);

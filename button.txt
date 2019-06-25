@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Button Animation</title>
+    <style>
+        body {
+            background: rgb(245, 230, 182);
+        }
+        #playbtn {
+            border-radius: 50%;
+            background-color: white;
+            border: none;
+            width: 7rem;
+            height: 7rem;
+            margin-left: 10%;
+            animation: playbtn 0.6s infinite alternate;
+        }
+        @keyframes playbtn {
+            from {
+                box-shadow: 0px 0px 2px 0px #ffffff;
+            }
+            to {
+                box-shadow: 0px 0px 30px 40px #ffffff;
+            }
+        }
+    </style>
+    
+</head>
+<body>
+    <button id="playbtn" class="nocolor">
+        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="100" height="100">
+            <circle id="Ellipse_1-2" data-name="Ellipse 1" cx="25" cy="25" r="50" transform="translate(25 25)" fill="#ffbb16"/>
+            <path id="Path_12" data-name="Path 12" d="M0,0,17.152,11.013,0,22.02Z" transform="translate(44.062 38.589)" fill="#f5f2f2"/>
+        </svg>
+    </button>
+</body>
+</html>
